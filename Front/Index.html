@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IORE – Instituto Odontológico de Reabilitação e Estética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #1e2d4e;
+    --gold: #c9a84c;
+    --gold-light: #e8c87a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf8f3;
+    --dark: #12192a;
+    --text: #2e2e2e;
+    --muted: #6b7280;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── LANGUAGE SWITCHER ── */
+  #lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: var(--dark);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 6px 32px;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: .08em;
+  }
+  #lang-bar span { color: var(--gold); font-weight: 500; }
+  .lang-btn {
+    background: none;
+    border: 1px solid rgba(201,168,76,.4);
+    color: var(--gold-light);
+    padding: 3px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: .06em;
+    transition: .2s;
+    font-family: 'Outfit', sans-serif;
+  }
+  .lang-btn:hover, .lang-btn.active { background: var(--gold); color: var(--dark); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 32px; left: 0; right: 0;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(18,25,42,.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,.15);
+    transition: top .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 44px; height: 44px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600; color: var(--dark);
+  }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .nav-logo-sub {
+    font-size: 9px; color: rgba(201,168,76,.6);
+    letter-spacing: .12em; text-transform: uppercase;
+    font-family: 'Outfit', sans-serif;
+  }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: .05em;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: .05em;
+    transition: .2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, #2a3f6b 100%);
+    display: flex; align-items: center;
+    padding-top: 104px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,.08) 0%, transparent 70%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%; max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 48px;
+    align-items: center;
+  }
+  .hero-left { padding-right: 60px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,.12);
+    border: 1px solid rgba(201,168,76,.3);
+    color: var(--gold);
+    padding: 6px 16px; border-radius: 30px;
+    font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 28px;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-badge::before { content: '✦'; font-size: 8px; }
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5.5vw, 72px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.08;
+    margin-bottom: 24px;
+    animation: fadeUp .8s .1s ease both;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,.65);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 440px;
+    animation: fadeUp .8s .2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: .25s;
+    letter-spacing: .04em;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.35); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(255,255,255,.3);
+    color: rgba(255,255,255,.85);
+    padding: 14px 32px;
+    border-radius: 40px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: .25s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  .hero-right {
+    position: relative;
+    animation: fadeIn 1s .2s ease both;
+  }
+  .hero-img-main {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 24px 24px 80px 24px;
+    box-shadow: 0 40px 80px rgba(0,0,0,.5);
+  }
+  .hero-img-float {
+    position: absolute;
+    bottom: -24px; left: -40px;
+    width: 200px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 4px solid var(--dark);
+    box-shadow: 0 16px 40px rgba(0,0,0,.4);
+  }
+  .hero-stats {
+    position: absolute;
+    top: 24px; left: -40px;
+    background: rgba(18,25,42,.95);
+    border: 1px solid rgba(201,168,76,.3);
+    border-radius: 16px;
+    padding: 16px 20px;
+    backdrop-filter: blur(12px);
+  }
+  .hero-stats-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; color: var(--gold);
+    font-weight: 600; line-height: 1;
+  }
+  .hero-stats-label { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .06em; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 48px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--gold);
+    font-size: 11px; letter-spacing: .15em;
+    text-transform: uppercase; font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .section-lead { font-size: 16px; color: var(--muted); line-height: 1.75; max-width: 560px; }
+
+  /* ── DIFERENCIAIS ── */
+  #diferenciais {
+    background: var(--cream);
+  }
+  .diferenciais-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .diff-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .diff-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    border: 1px solid rgba(0,0,0,.06);
+    transition: .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .diff-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .diff-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+  .diff-card:hover::before { transform: scaleX(1); }
+  .diff-icon {
+    width: 48px; height: 48px;
+    background: var(--gold-pale);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .diff-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .diff-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  .diff-img-stack { position: relative; }
+  .diff-img-main {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 32px;
+  }
+  .diff-img-badge {
+    position: absolute; bottom: 28px; right: -24px;
+    background: var(--navy);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 16px;
+    text-align: center;
+    min-width: 130px;
+  }
+  .diff-img-badge strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--gold);
+    line-height: 1;
+  }
+  .diff-img-badge span { font-size: 11px; color: rgba(255,255,255,.65); }
+
+  /* ── MÉDICOS ── */
+  #medicos {
+    background: var(--navy);
+    color: white;
+  }
+  #medicos .section-h2 { color: white; }
+  #medicos .section-lead { color: rgba(255,255,255,.6); }
+  .medicos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 60px;
+  }
+  .medico-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(201,168,76,.2);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex; gap: 24px; align-items: flex-start;
+    transition: .3s;
+  }
+  .medico-card:hover { background: rgba(201,168,76,.08); transform: translateY(-3px); }
+  .medico-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600;
+    color: var(--dark); flex-shrink: 0;
+  }
+  .medico-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600;
+    color: var(--gold-light); margin-bottom: 6px;
+  }
+  .medico-info .cro { font-size: 12px; color: rgba(201,168,76,.6); letter-spacing: .06em; margin-bottom: 12px; }
+  .medico-info p { font-size: 14px; color: rgba(255,255,255,.65); line-height: 1.7; }
+  .medico-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .medico-tag {
+    background: rgba(201,168,76,.15);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+
+  /* ── GALERIA ── */
+  #clinica {
+    background: white;
+  }
+  .galeria-intro { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 24px; }
+  .galeria-mosaic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+  }
+  .gal-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gal-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+  .gal-item:nth-child(4) { grid-column: 2 / 4; grid-row: 2; }
+  .gal-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    min-height: 240px;
+    transition: transform .5s;
+  }
+  .gal-item:hover img { transform: scale(1.05); }
+  .gal-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(18,25,42,.7) 0%, transparent 60%);
+    opacity: 0; transition: .3s;
+    display: flex; align-items: flex-end;
+    padding: 20px;
+  }
+  .gal-item:hover .gal-overlay { opacity: 1; }
+  .gal-overlay span { color: white; font-size: 13px; }
+
+  /* ── SERVIÇOS ── */
+  #servicos { background: var(--cream); }
+  .servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .servico-card {
+    background: white;
+    border-radius: 20px;
+    padding: 36px 28px;
+    border: 1px solid rgba(0,0,0,.06);
+    transition: .3s;
+    position: relative;
+  }
+  .servico-card:hover {
+    background: var(--navy);
+    color: white;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(30,45,78,.2);
+  }
+  .servico-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300;
+    color: var(--gold-pale); line-height: 1;
+    margin-bottom: 12px;
+    transition: .3s;
+  }
+  .servico-card:hover .servico-num { color: rgba(201,168,76,.3); }
+  .servico-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+    margin-bottom: 10px; transition: color .3s;
+  }
+  .servico-card:hover h3 { color: var(--gold-light); }
+  .servico-card p { font-size: 14px; color: var(--muted); line-height: 1.65; transition: color .3s; }
+  .servico-card:hover p { color: rgba(255,255,255,.65); }
+
+  /* ── AGENDAMENTO (CTA) ── */
+  #agendamento {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 100%);
+    color: white;
+    text-align: center;
+    padding: 100px 48px;
+    position: relative; overflow: hidden;
+  }
+  #agendamento::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201,168,76,.1) 0%, transparent 70%);
+  }
+  .agendar-box {
+    max-width: 700px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .agendar-box .section-h2 { color: white; margin-bottom: 20px; }
+  .agendar-box .section-lead { color: rgba(255,255,255,.65); margin: 0 auto 48px; text-align: center; }
+  .agendar-options {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  }
+  .agendar-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 36px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .25s;
+    letter-spacing: .03em;
+  }
+  .agendar-btn.whatsapp {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 8px 32px rgba(37,211,102,.3);
+  }
+  .agendar-btn.whatsapp:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(37,211,102,.4); }
+  .agendar-btn.tel {
+    background: rgba(255,255,255,.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .agendar-btn.tel:hover { background: rgba(255,255,255,.18); transform: translateY(-3px); }
+  .agendar-nota { margin-top: 28px; font-size: 13px; color: rgba(255,255,255,.4); }
+
+  /* ── LOCALIZAÇÃO ── */
+  #localizacao { background: white; }
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+  .loc-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .loc-item {
+    display: flex; gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .loc-ico {
+    width: 44px; height: 44px;
+    background: var(--gold-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .loc-item-text strong { display: block; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .loc-item-text p { font-size: 15px; color: var(--text); line-height: 1.6; }
+  .loc-item-text a { color: var(--text); text-decoration: none; }
+  .loc-item-text a:hover { color: var(--gold); }
+  .loc-social { display: flex; gap: 12px; margin-top: 32px; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: .2s;
+    border: 1px solid;
+  }
+  .social-btn.insta {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: white; border-color: transparent;
+  }
+  .social-btn.insta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(253,29,29,.3); }
+  .social-btn.wa {
+    background: #25D366; color: white; border-color: transparent;
+  }
+  .social-btn.wa:hover { transform: translateY(-2px); }
+
+  .map-frame {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.1);
+    height: 420px;
+  }
+  .map-frame iframe { width: 100%; height: 100%; border: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+  }
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  footer a { color: rgba(201,168,76,.6); text-decoration: none; }
+  footer a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── VLIBRAS OFFSET ── */
+  .vw-plugin-wrapper { z-index: 9999 !important; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 70px 20px; }
+    .hero-grid, .diferenciais-grid, .medicos-grid,
+    .loc-grid { grid-template-columns: 1fr; }
+    .diff-cards { grid-template-columns: 1fr 1fr; }
+    .servicos-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-mosaic { grid-template-columns: 1fr 1fr; }
+    .gal-item:nth-child(1), .gal-item:nth-child(4) { grid-column: auto; grid-row: auto; }
+    .hero-left { padding-right: 0; }
+    .hero-img-float, .hero-stats { display: none; }
+    .diff-img-badge { right: 16px; }
+    .agendar-options { flex-direction: column; align-items: center; }
+  }
+  @media (max-width: 600px) {
+    .diff-cards, .servicos-grid { grid-template-columns: 1fr; }
+    .galeria-mosaic { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- VLibras -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+<!-- Language Bar -->
+<div id="lang-bar">
+  <span data-i18n="lang_label">Idioma:</span>
+  <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('es')">ES</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">I</div>
+    <div>
+      <div class="nav-logo-text">IORE</div>
+      <div class="nav-logo-sub" data-i18n="nav_sub">Odontologia Premium</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#diferenciais" data-i18n="nav_diff">Diferenciais</a></li>
+    <li><a href="#medicos" data-i18n="nav_team">Equipe</a></li>
+    <li><a href="#clinica" data-i18n="nav_clinic">Clínica</a></li>
+    <li><a href="#servicos" data-i18n="nav_services">Serviços</a></li>
+    <li><a href="#localizacao" data-i18n="nav_loc">Localização</a></li>
+  </ul>
+  <a href="https://wa.me/5517997760055" target="_blank" class="nav-cta" data-i18n="nav_cta">Agendar Consulta</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid container">
+    <div class="hero-left">
+      <div class="hero-badge" data-i18n="hero_badge">Excelência em Odontologia</div>
+      <h1 class="hero-h1" data-i18n="hero_h1">Seu sorriso <em>merece</em><br>o melhor cuidado.</h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        No IORE unimos tecnologia de ponta, estética refinada e acolhimento humano para transformar a sua saúde bucal com conforto e precisão.
+      </p>
+      <div class="hero-btns">
+        <a href="https://wa.me/5517997760055" target="_blank" class="btn-gold" data-i18n="hero_btn1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <span data-i18n="hero_btn1">Agendar pelo WhatsApp</span>
+        </a>
+        <a href="#servicos" class="btn-outline" data-i18n="hero_btn2">Ver Serviços</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="hero-stats-num">+500</div>
+        <div class="hero-stats-label" data-i18n="hero_stat">Pacientes Atendidos</div>
+      </div>
+      <img src="1778421756959_image.png" alt="Atendimento IORE" class="hero-img-main">
+      <img src="1778421745221_image.png" alt="Clínica IORE" class="hero-img-float">
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="diferenciais-grid">
+      <div class="diff-img-stack reveal">
+        <img src="1778421705809_image.png" alt="Fachada IORE" class="diff-img-main">
+        <div class="diff-img-badge">
+          <strong>2+</strong>
+          <span data-i18n="diff_badge">Anos de excelência</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-tag" data-i18n="diff_tag">Por que nos escolher</div>
+        <h2 class="section-h2" data-i18n="diff_h2">Nosso diferencial está em cada detalhe</h2>
+        <p class="section-lead" data-i18n="diff_lead">Da recepção ao consultório, cada etapa é pensada para proporcionar conforto, confiança e resultados extraordinários.</p>
+        <div class="diff-cards" style="margin-top:40px">
+          <div class="diff-card">
+            <div class="diff-icon">🏆</div>
+            <h3 data-i18n="dc1_title">Alta Especialização</h3>
+            <p data-i18n="dc1_text">Equipe com formação avançada em implantes, estética e reabilitação oral.</p>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon">✨</div>
+            <h3 data-i18n="dc2_title">Tecnologia de Ponta</h3>
+            <p data-i18n="dc2_text">Equipamentos modernos para diagnóstico preciso e tratamentos eficientes.</p>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon">🤝</div>
+            <h3 data-i18n="dc3_title">Atendimento Humanizado</h3>
+            <p data-i18n="dc3_text">Cada paciente é único. Cuidamos com atenção e respeito em todas as etapas.</p>
+          </div>
+          <div class="diff-card">
+            <div class="diff-icon">💎</div>
+            <h3 data-i18n="dc4_title">Ambiente Premium</h3>
+            <p data-i18n="dc4_text">Espaço sofisticado projetado para seu conforto e bem-estar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPE -->
+<section id="medicos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag" data-i18n="team_tag">Nossa Equipe</div>
+      <h2 class="section-h2" data-i18n="team_h2">Especialistas dedicados ao seu sorriso</h2>
+      <p class="section-lead" data-i18n="team_lead">Com formação reconhecida e paixão pela odontologia, nossa equipe une técnica e cuidado para entregar o melhor resultado.</p>
+    </div>
+    <div class="medicos-grid reveal">
+      <div class="medico-card">
+        <div class="medico-avatar">BL</div>
+        <div class="medico-info">
+          <h3>Dr. Bruno Leite</h3>
+          <div class="cro" data-i18n="dr1_cro">Cirurgião-Dentista · CRO-SP</div>
+          <p data-i18n="dr1_bio">Especialista em Implantodontia e Reabilitação Oral, com foco em devolver função e estética com precisão e cuidado.</p>
+          <div class="medico-tags">
+            <span class="medico-tag" data-i18n="tag_impl">Implantes</span>
+            <span class="medico-tag" data-i18n="tag_rehab">Reabilitação</span>
+            <span class="medico-tag" data-i18n="tag_cir">Cirurgia</span>
+          </div>
+        </div>
+      </div>
+      <div class="medico-card">
+        <div class="medico-avatar">TA</div>
+        <div class="medico-info">
+          <h3>Dra. Tamiris Armenine</h3>
+          <div class="cro" data-i18n="dr2_cro">Cirurgiã-Dentista · CRO-SP</div>
+          <p data-i18n="dr2_bio">Especialista em Odontologia Estética, comprometida com transformações sorridentes que elevam a autoestima e qualidade de vida.</p>
+          <div class="medico-tags">
+            <span class="medico-tag" data-i18n="tag_est">Estética</span>
+            <span class="medico-tag" data-i18n="tag_fac">Facetas</span>
+            <span class="medico-tag" data-i18n="tag_clar">Clareamento</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="clinica">
+  <div class="container">
+    <div class="galeria-intro reveal">
+      <div>
+        <div class="section-tag" data-i18n="gal_tag">Nossa Clínica</div>
+        <h2 class="section-h2" data-i18n="gal_h2">Um ambiente pensado para você</h2>
+      </div>
+      <p class="section-lead" style="max-width:360px" data-i18n="gal_lead">Ambiente moderno e acolhedor para que você se sinta seguro e confortável durante todo o atendimento.</p>
+    </div>
+    <div class="galeria-mosaic reveal">
+      <div class="gal-item">
+        <img src="1778421715669_image.png" alt="Fachada IORE noturna">
+        <div class="gal-overlay"><span data-i18n="gal_1">Fachada · Vista Noturna</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="1778421732242_image.png" alt="Consultório IORE" style="min-height:240px;object-fit:cover">
+        <div class="gal-overlay"><span data-i18n="gal_2">Consultório</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="1778421763477_image.png" alt="Fachada alternativa">
+        <div class="gal-overlay"><span data-i18n="gal_3">Fachada</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="1778421738796_image.png" alt="Recepção IORE">
+        <div class="gal-overlay"><span data-i18n="gal_4">Recepção · Sala de Espera</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="1778421751236_image.png" alt="Sala de espera">
+        <div class="gal-overlay"><span data-i18n="gal_5">Sala de Espera</span></div>
+      </div>
+      <div class="gal-item">
+        <img src="1778421723830_image.png" alt="Sala de Atendimento">
+        <div class="gal-overlay"><span data-i18n="gal_6">Sala de Atendimento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="section-tag" data-i18n="srv_tag">O que oferecemos</div>
+      <h2 class="section-h2" data-i18n="srv_h2">Nossos Serviços</h2>
+      <p class="section-lead" style="margin:0 auto" data-i18n="srv_lead">Soluções completas para saúde e beleza do seu sorriso, com tecnologia e cuidado especializado.</p>
+    </div>
+    <div class="servicos-grid reveal">
+      <div class="servico-card">
+        <div class="servico-num">01</div>
+        <h3 data-i18n="s1_t">Implantes Dentários</h3>
+        <p data-i18n="s1_p">Reposição de dentes com implantes de titânio de alta qualidade, devolvendo função e estética natural.</p>
+      </div>
+      <div class="servico-card">
+        <div class="servico-num">02</div>
+        <h3 data-i18n="s2_t">Estética Dental</h3>
+        <p data-i18n="s2_p">Facetas, clareamento e remodelação para um sorriso harmonioso e deslumbrante.</p>
+      </div>
+      <div class="servico-card">
+        <div class="servico-num">03</div>
+        <h3 data-i18n="s3_t">Próteses e Reabilitação</h3>
+        <p data-i18n="s3_p">Reabilitação oral completa com próteses fixas e removíveis de excelência.</p>
+      </div>
+      <div class="servico-card">
+        <div class="servico-num">04</div>
+        <h3 data-i18n="s4_t">Ortodontia</h3>
+        <p data-i18n="s4_p">Aparelhos tradicionais e alinhadores invisíveis para corrigir o posicionamento dos dentes.</p>
+      </div>
+      <div class="servico-card">
+        <div class="servico-num">05</div>
+        <h3 data-i18n="s5_t">Cirurgia Oral</h3>
+        <p data-i18n="s5_p">Procedimentos cirúrgicos com máxima segurança, conforto e recuperação rápida.</p>
+      </div>
+      <div class="servico-card">
+        <div class="servico-num">06</div>
+        <h3 data-i18n="s6_t">Odontopediatria</h3>
+        <p data-i18n="s6_p">Cuidado especializado para crianças, em ambiente acolhedor e amoroso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAMENTO CTA -->
+<section id="agendamento">
+  <div class="agendar-box reveal">
+    <div class="section-tag" style="justify-content:center" data-i18n="ag_tag">Atendimento Especializado</div>
+    <h2 class="section-h2" data-i18n="ag_h2">Pronto para transformar<br>o seu sorriso?</h2>
+    <p class="section-lead" data-i18n="ag_lead">
+      Agende sua consulta de avaliação com nossa equipe. Responderemos rapidamente pelo WhatsApp para encontrar o melhor horário para você.
+    </p>
+    <div class="agendar-options">
+      <a href="https://wa.me/5517997760055?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20no%20IORE." target="_blank" class="agendar-btn whatsapp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span data-i18n="ag_btn_wa">Agendar pelo WhatsApp</span>
+      </a>
+      <a href="tel:+5517997760055" class="agendar-btn tel">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 011 2.38 2 2 0 012.96 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <span data-i18n="ag_btn_tel">(17) 99776-0055</span>
+      </a>
+    </div>
+    <p class="agendar-nota" data-i18n="ag_nota">Segunda a Sexta: 8h–18h &nbsp;|&nbsp; Sábado: 8h–12h</p>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section id="localizacao">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag" data-i18n="loc_tag">Onde estamos</div>
+      <h2 class="section-h2" data-i18n="loc_h2">Venha nos visitar</h2>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-info reveal">
+        <h3 data-i18n="loc_sub">IORE Odontologia</h3>
+        <div class="loc-item">
+          <div class="loc-ico">📍</div>
+          <div class="loc-item-text">
+            <strong data-i18n="loc_addr_lbl">Endereço</strong>
+            <p>R. Donato Vissechi, 447<br>José Bonifácio – SP, 15200-000</p>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-ico">📞</div>
+          <div class="loc-item-text">
+            <strong data-i18n="loc_phone_lbl">Telefone / WhatsApp</strong>
+            <p><a href="tel:+5517997760055">(17) 99776-0055</a></p>
+          </div>
+        </div>
+        <div class="loc-item">
+          <div class="loc-ico">🕐</div>
+          <div class="loc-item-text">
+            <strong data-i18n="loc_hours_lbl">Horário de Funcionamento</strong>
+            <p data-i18n="loc_hours_val">Seg–Sex: 8h às 18h<br>Sábado: 8h às 12h</p>
+          </div>
+        </div>
+        <div class="loc-social">
+          <a href="https://www.instagram.com/iore.odonto/" target="_blank" class="social-btn insta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            @iore.odonto
+          </a>
+          <a href="https://wa.me/5517997760055" target="_blank" class="social-btn wa">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="map-frame reveal">
+        <iframe
+          src="https://maps.google.com/maps?q=R.+Donato+Vissechi,+447,+José+Bonifácio+-+SP,+15200-000&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">IORE</div>
+  <p data-i18n="footer_sub">Instituto Odontológico de Reabilitação e Estética</p>
+  <p style="margin-top:8px">
+    <a href="https://www.instagram.com/iore.odonto/" target="_blank">Instagram</a> &nbsp;·&nbsp;
+    <a href="https://wa.me/5517997760055" target="_blank">WhatsApp</a> &nbsp;·&nbsp;
+    R. Donato Vissechi, 447 – José Bonifácio/SP
+  </p>
+  <p style="margin-top:16px;font-size:11px;opacity:.4" data-i18n="footer_copy">© 2025 IORE. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const translations = {
+  pt: {
+    lang_label: "Idioma:", nav_sub: "Odontologia Premium",
+    nav_diff: "Diferenciais", nav_team: "Equipe", nav_clinic: "Clínica",
+    nav_services: "Serviços", nav_loc: "Localização", nav_cta: "Agendar Consulta",
+    hero_badge: "Excelência em Odontologia",
+    hero_h1: "Seu sorriso <em>merece</em><br>o melhor cuidado.",
+    hero_sub: "No IORE unimos tecnologia de ponta, estética refinada e acolhimento humano para transformar a sua saúde bucal com conforto e precisão.",
+    hero_btn1: "Agendar pelo WhatsApp", hero_btn2: "Ver Serviços",
+    hero_stat: "Pacientes Atendidos",
+    diff_badge: "Anos de excelência", diff_tag: "Por que nos escolher",
+    diff_h2: "Nosso diferencial está em cada detalhe",
+    diff_lead: "Da recepção ao consultório, cada etapa é pensada para proporcionar conforto, confiança e resultados extraordinários.",
+    dc1_title: "Alta Especialização", dc1_text: "Equipe com formação avançada em implantes, estética e reabilitação oral.",
+    dc2_title: "Tecnologia de Ponta", dc2_text: "Equipamentos modernos para diagnóstico preciso e tratamentos eficientes.",
+    dc3_title: "Atendimento Humanizado", dc3_text: "Cada paciente é único. Cuidamos com atenção e respeito em todas as etapas.",
+    dc4_title: "Ambiente Premium", dc4_text: "Espaço sofisticado projetado para seu conforto e bem-estar.",
+    team_tag: "Nossa Equipe", team_h2: "Especialistas dedicados ao seu sorriso",
+    team_lead: "Com formação reconhecida e paixão pela odontologia, nossa equipe une técnica e cuidado para entregar o melhor resultado.",
+    dr1_cro: "Cirurgião-Dentista · CRO-SP",
+    dr1_bio: "Especialista em Implantodontia e Reabilitação Oral, com foco em devolver função e estética com precisão e cuidado.",
+    dr2_cro: "Cirurgiã-Dentista · CRO-SP",
+    dr2_bio: "Especialista em Odontologia Estética, comprometida com transformações sorridentes que elevam a autoestima e qualidade de vida.",
+    tag_impl: "Implantes", tag_rehab: "Reabilitação", tag_cir: "Cirurgia",
+    tag_est: "Estética", tag_fac: "Facetas", tag_clar: "Clareamento",
+    gal_tag: "Nossa Clínica", gal_h2: "Um ambiente pensado para você",
+    gal_lead: "Ambiente moderno e acolhedor para que você se sinta seguro e confortável durante todo o atendimento.",
+    gal_1: "Fachada · Vista Noturna", gal_2: "Consultório", gal_3: "Fachada",
+    gal_4: "Recepção · Sala de Espera", gal_5: "Sala de Espera", gal_6: "Sala de Atendimento",
+    srv_tag: "O que oferecemos", srv_h2: "Nossos Serviços",
+    srv_lead: "Soluções completas para saúde e beleza do seu sorriso, com tecnologia e cuidado especializado.",
+    s1_t: "Implantes Dentários", s1_p: "Reposição de dentes com implantes de titânio de alta qualidade, devolvendo função e estética natural.",
+    s2_t: "Estética Dental", s2_p: "Facetas, clareamento e remodelação para um sorriso harmonioso e deslumbrante.",
+    s3_t: "Próteses e Reabilitação", s3_p: "Reabilitação oral completa com próteses fixas e removíveis de excelência.",
+    s4_t: "Ortodontia", s4_p: "Aparelhos tradicionais e alinhadores invisíveis para corrigir o posicionamento dos dentes.",
+    s5_t: "Cirurgia Oral", s5_p: "Procedimentos cirúrgicos com máxima segurança, conforto e recuperação rápida.",
+    s6_t: "Odontopediatria", s6_p: "Cuidado especializado para crianças, em ambiente acolhedor e amoroso.",
+    ag_tag: "Atendimento Especializado", ag_h2: "Pronto para transformar<br>o seu sorriso?",
+    ag_lead: "Agende sua consulta de avaliação com nossa equipe. Responderemos rapidamente pelo WhatsApp para encontrar o melhor horário para você.",
+    ag_btn_wa: "Agendar pelo WhatsApp", ag_btn_tel: "(17) 99776-0055",
+    ag_nota: "Segunda a Sexta: 8h–18h | Sábado: 8h–12h",
+    loc_tag: "Onde estamos", loc_h2: "Venha nos visitar", loc_sub: "IORE Odontologia",
+    loc_addr_lbl: "Endereço", loc_phone_lbl: "Telefone / WhatsApp",
+    loc_hours_lbl: "Horário de Funcionamento", loc_hours_val: "Seg–Sex: 8h às 18h<br>Sábado: 8h às 12h",
+    footer_sub: "Instituto Odontológico de Reabilitação e Estética",
+    footer_copy: "© 2025 IORE. Todos os direitos reservados."
+  },
+  en: {
+    lang_label: "Language:", nav_sub: "Premium Dentistry",
+    nav_diff: "Highlights", nav_team: "Team", nav_clinic: "Clinic",
+    nav_services: "Services", nav_loc: "Location", nav_cta: "Book Appointment",
+    hero_badge: "Excellence in Dentistry",
+    hero_h1: "Your smile <em>deserves</em><br>the best care.",
+    hero_sub: "At IORE we combine cutting-edge technology, refined aesthetics and human care to transform your oral health with comfort and precision.",
+    hero_btn1: "Book via WhatsApp", hero_btn2: "View Services",
+    hero_stat: "Patients Treated",
+    diff_badge: "Years of excellence", diff_tag: "Why choose us",
+    diff_h2: "Our difference is in every detail",
+    diff_lead: "From reception to the chair, every step is designed to provide comfort, trust and extraordinary results.",
+    dc1_title: "High Specialization", dc1_text: "Team with advanced training in implants, aesthetics and oral rehabilitation.",
+    dc2_title: "Cutting-Edge Technology", dc2_text: "Modern equipment for precise diagnosis and efficient treatments.",
+    dc3_title: "Humanized Care", dc3_text: "Each patient is unique. We care with attention and respect at every step.",
+    dc4_title: "Premium Environment", dc4_text: "Sophisticated space designed for your comfort and well-being.",
+    team_tag: "Our Team", team_h2: "Specialists dedicated to your smile",
+    team_lead: "With recognized training and passion for dentistry, our team combines technique and care to deliver the best result.",
+    dr1_cro: "Dental Surgeon · CRO-SP",
+    dr1_bio: "Specialist in Implantology and Oral Rehabilitation, focused on restoring function and aesthetics with precision and care.",
+    dr2_cro: "Dental Surgeon · CRO-SP",
+    dr2_bio: "Specialist in Aesthetic Dentistry, committed to smile transformations that boost self-esteem and quality of life.",
+    tag_impl: "Implants", tag_rehab: "Rehabilitation", tag_cir: "Surgery",
+    tag_est: "Aesthetics", tag_fac: "Veneers", tag_clar: "Whitening",
+    gal_tag: "Our Clinic", gal_h2: "A space designed for you",
+    gal_lead: "Modern and welcoming environment so you feel safe and comfortable throughout your appointment.",
+    gal_1: "Exterior · Night View", gal_2: "Dental Office", gal_3: "Exterior",
+    gal_4: "Reception · Waiting Room", gal_5: "Waiting Room", gal_6: "Treatment Room",
+    srv_tag: "What we offer", srv_h2: "Our Services",
+    srv_lead: "Complete solutions for your smile's health and beauty, with specialized technology and care.",
+    s1_t: "Dental Implants", s1_p: "Tooth replacement with high-quality titanium implants, restoring natural function and aesthetics.",
+    s2_t: "Dental Aesthetics", s2_p: "Veneers, whitening and reshaping for a harmonious and stunning smile.",
+    s3_t: "Prosthetics & Rehabilitation", s3_p: "Complete oral rehabilitation with excellent fixed and removable prosthetics.",
+    s4_t: "Orthodontics", s4_p: "Traditional braces and invisible aligners to correct tooth positioning.",
+    s5_t: "Oral Surgery", s5_p: "Surgical procedures with maximum safety, comfort and rapid recovery.",
+    s6_t: "Pediatric Dentistry", s6_p: "Specialized care for children in a welcoming and loving environment.",
+    ag_tag: "Specialized Care", ag_h2: "Ready to transform<br>your smile?",
+    ag_lead: "Book your evaluation appointment with our team. We'll respond quickly via WhatsApp to find the best time for you.",
+    ag_btn_wa: "Book via WhatsApp", ag_btn_tel: "+55 (17) 99776-0055",
+    ag_nota: "Mon–Fri: 8am–6pm | Saturday: 8am–12pm",
+    loc_tag: "Find us", loc_h2: "Come visit us", loc_sub: "IORE Dentistry",
+    loc_addr_lbl: "Address", loc_phone_lbl: "Phone / WhatsApp",
+    loc_hours_lbl: "Opening Hours", loc_hours_val: "Mon–Fri: 8am to 6pm<br>Saturday: 8am to 12pm",
+    footer_sub: "Institute for Oral Rehabilitation and Aesthetics",
+    footer_copy: "© 2025 IORE. All rights reserved."
+  },
+  es: {
+    lang_label: "Idioma:", nav_sub: "Odontología Premium",
+    nav_diff: "Diferenciales", nav_team: "Equipo", nav_clinic: "Clínica",
+    nav_services: "Servicios", nav_loc: "Ubicación", nav_cta: "Agendar Cita",
+    hero_badge: "Excelencia en Odontología",
+    hero_h1: "Tu sonrisa <em>merece</em><br>el mejor cuidado.",
+    hero_sub: "En IORE combinamos tecnología de punta, estética refinada y atención humana para transformar tu salud bucal con comodidad y precisión.",
+    hero_btn1: "Agendar por WhatsApp", hero_btn2: "Ver Servicios",
+    hero_stat: "Pacientes Atendidos",
+    diff_badge: "Años de excelencia", diff_tag: "Por qué elegirnos",
+    diff_h2: "Nuestro diferencial está en cada detalle",
+    diff_lead: "Desde la recepción hasta el consultorio, cada etapa está pensada para brindar comodidad, confianza y resultados extraordinarios.",
+    dc1_title: "Alta Especialización", dc1_text: "Equipo con formación avanzada en implantes, estética y rehabilitación oral.",
+    dc2_title: "Tecnología de Punta", dc2_text: "Equipos modernos para diagnóstico preciso y tratamientos eficientes.",
+    dc3_title: "Atención Humanizada", dc3_text: "Cada paciente es único. Cuidamos con atención y respeto en cada etapa.",
+    dc4_title: "Ambiente Premium", dc4_text: "Espacio sofisticado diseñado para tu comodidad y bienestar.",
+    team_tag: "Nuestro Equipo", team_h2: "Especialistas dedicados a tu sonrisa",
+    team_lead: "Con formación reconocida y pasión por la odontología, nuestro equipo une técnica y cuidado para brindar el mejor resultado.",
+    dr1_cro: "Cirujano-Dentista · CRO-SP",
+    dr1_bio: "Especialista en Implantología y Rehabilitación Oral, enfocado en devolver función y estética con precisión y cuidado.",
+    dr2_cro: "Cirujana-Dentista · CRO-SP",
+    dr2_bio: "Especialista en Odontología Estética, comprometida con transformaciones de sonrisa que elevan la autoestima y calidad de vida.",
+    tag_impl: "Implantes", tag_rehab: "Rehabilitación", tag_cir: "Cirugía",
+    tag_est: "Estética", tag_fac: "Carillas", tag_clar: "Blanqueamiento",
+    gal_tag: "Nuestra Clínica", gal_h2: "Un espacio pensado para ti",
+    gal_lead: "Ambiente moderno y acogedor para que te sientas seguro y cómodo durante toda la atención.",
+    gal_1: "Fachada · Vista Nocturna", gal_2: "Consultorio", gal_3: "Fachada",
+    gal_4: "Recepción · Sala de Espera", gal_5: "Sala de Espera", gal_6: "Sala de Atención",
+    srv_tag: "Lo que ofrecemos", srv_h2: "Nuestros Servicios",
+    srv_lead: "Soluciones completas para la salud y belleza de tu sonrisa, con tecnología y cuidado especializado.",
+    s1_t: "Implantes Dentales", s1_p: "Reemplazo de dientes con implantes de titanio de alta calidad, devolviendo función y estética natural.",
+    s2_t: "Estética Dental", s2_p: "Carillas, blanqueamiento y remodelación para una sonrisa armoniosa y deslumbrante.",
+    s3_t: "Prótesis y Rehabilitación", s3_p: "Rehabilitación oral completa con prótesis fijas y removibles de excelencia.",
+    s4_t: "Ortodoncia", s4_p: "Aparatos tradicionales y alineadores invisibles para corregir el posicionamiento dental.",
+    s5_t: "Cirugía Oral", s5_p: "Procedimientos quirúrgicos con máxima seguridad, comodidad y recuperación rápida.",
+    s6_t: "Odontopediatría", s6_p: "Atención especializada para niños en un ambiente acogedor y cariñoso.",
+    ag_tag: "Atención Especializada", ag_h2: "¿Listo para transformar<br>tu sonrisa?",
+    ag_lead: "Agenda tu consulta de evaluación con nuestro equipo. Te responderemos rápidamente por WhatsApp para encontrar el mejor horario.",
+    ag_btn_wa: "Agendar por WhatsApp", ag_btn_tel: "+55 (17) 99776-0055",
+    ag_nota: "Lun–Vie: 8h–18h | Sábado: 8h–12h",
+    loc_tag: "Dónde estamos", loc_h2: "Ven a visitarnos", loc_sub: "IORE Odontología",
+    loc_addr_lbl: "Dirección", loc_phone_lbl: "Teléfono / WhatsApp",
+    loc_hours_lbl: "Horario de Atención", loc_hours_val: "Lun–Vie: 8h a 18h<br>Sábado: 8h a 12h",
+    footer_sub: "Instituto Odontológico de Rehabilitación y Estética",
+    footer_copy: "© 2025 IORE. Todos los derechos reservados."
+  }
+};
+
+let currentLang = 'pt';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+}
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
