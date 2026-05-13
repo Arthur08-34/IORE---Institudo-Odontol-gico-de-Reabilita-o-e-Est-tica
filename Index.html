@@ -607,6 +607,204 @@
   }
   .map-frame iframe { width: 100%; height: 100%; border: none; }
 
+  /* ── AVALIAÇÕES ── */
+  #avaliacoes {
+    background: var(--cream);
+    padding: 100px 48px;
+  }
+  .aval-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .aval-score-box {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: white;
+    border: 1px solid rgba(201,168,76,.2);
+    border-radius: 24px;
+    padding: 28px 36px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.06);
+  }
+  .aval-score-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .aval-score-stars { display: flex; gap: 4px; margin-bottom: 6px; }
+  .aval-score-stars svg { color: var(--gold); }
+  .aval-score-label { font-size: 13px; color: var(--muted); }
+
+  .aval-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .aval-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 28px;
+    border: 1px solid rgba(0,0,0,.06);
+    transition: .3s;
+    position: relative;
+  }
+  .aval-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+  .aval-card::before {
+    content: '"';
+    position: absolute;
+    top: 16px; right: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--gold-pale);
+    line-height: 1;
+  }
+  .aval-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+  .aval-stars svg { color: var(--gold); }
+  .aval-text { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
+  .aval-author { display: flex; align-items: center; gap: 12px; }
+  .aval-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), #2a3f6b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    flex-shrink: 0;
+  }
+  .aval-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+  .aval-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .aval-tags-chip {
+    display: inline-block;
+    background: var(--gold-pale);
+    color: var(--navy);
+    font-size: 10px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  /* ── FORM DE AVALIAÇÃO ── */
+  .aval-form-wrap {
+    background: white;
+    border-radius: 28px;
+    padding: 52px 56px;
+    border: 1px solid rgba(201,168,76,.15);
+    box-shadow: 0 16px 60px rgba(0,0,0,.06);
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .aval-form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .aval-form-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
+  .aval-criteria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .aval-criterion label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .star-row { display: flex; gap: 6px; }
+  .star-btn {
+    background: none; border: none;
+    cursor: pointer;
+    padding: 2px;
+    transition: transform .15s;
+  }
+  .star-btn:hover { transform: scale(1.2); }
+  .star-btn svg { display: block; }
+  .star-btn svg path { transition: fill .15s; }
+
+  .aval-field {
+    margin-bottom: 20px;
+  }
+  .aval-field label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .aval-field input, .aval-field textarea, .aval-field select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid rgba(0,0,0,.1);
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color .2s;
+    outline: none;
+    resize: vertical;
+  }
+  .aval-field input:focus, .aval-field textarea:focus, .aval-field select:focus {
+    border-color: var(--gold);
+    background: white;
+  }
+  .aval-fields-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .aval-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    padding: 16px 40px;
+    border-radius: 40px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+    letter-spacing: .04em;
+    margin-top: 8px;
+  }
+  .aval-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.35); }
+  .aval-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .aval-success-icon {
+    font-size: 52px; margin-bottom: 16px;
+  }
+  .aval-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: var(--navy); margin-bottom: 10px;
+  }
+  .aval-success p { font-size: 15px; color: var(--muted); }
+
+  @media (max-width: 768px) {
+    .aval-grid { grid-template-columns: 1fr; }
+    .aval-criteria { grid-template-columns: 1fr; }
+    .aval-form-wrap { padding: 32px 24px; }
+    .aval-fields-row { grid-template-columns: 1fr; }
+    .aval-header { flex-direction: column; }
+  }
+
   /* ── FOOTER ── */
   footer {
     background: var(--dark);
@@ -642,9 +840,67 @@
   .vw-plugin-wrapper { z-index: 9999 !important; }
 
   /* ── MOBILE ── */
+  /* ── HAMBURGER MENU ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold-light);
+    border-radius: 2px;
+    transition: .3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(12,19,35,.97);
+    z-index: 950;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 100px 24px 40px;
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-menu a {
+    color: rgba(255,255,255,.85);
+    text-decoration: none;
+    font-size: 22px;
+    letter-spacing: .06em;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    transition: color .2s;
+  }
+  .nav-mobile-menu a:hover { color: var(--gold-light); }
+  .nav-mobile-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 14px 36px;
+    border-radius: 40px;
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    margin-top: 8px;
+  }
+
   @media (max-width: 900px) {
     nav { padding: 0 20px; }
-    .nav-links { display: none; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
     section { padding: 70px 20px; }
     .hero-grid, .diferenciais-grid, .medicos-grid,
     .loc-grid { grid-template-columns: 1fr; }
@@ -656,10 +912,35 @@
     .hero-img-float, .hero-stats { display: none; }
     .diff-img-badge { right: 16px; }
     .agendar-options { flex-direction: column; align-items: center; }
+    .medico-card { flex-direction: column; align-items: flex-start; }
+    .hero-h1 { font-size: clamp(32px, 8vw, 52px); }
+    .modal-header { padding: 32px 24px 24px; flex-direction: column; gap: 16px; }
+    .modal-body { padding: 24px; }
+    .modal-box { border-radius: 20px; max-height: 95vh; }
   }
+
   @media (max-width: 600px) {
+    #lang-bar { padding: 5px 16px; font-size: 11px; }
     .diff-cards, .servicos-grid { grid-template-columns: 1fr; }
     .galeria-mosaic { grid-template-columns: 1fr; }
+    section { padding: 60px 16px; }
+    .aval-grid { grid-template-columns: 1fr; }
+    .aval-criteria { grid-template-columns: 1fr; }
+    .aval-form-wrap { padding: 28px 20px; }
+    .aval-fields-row { grid-template-columns: 1fr; }
+    .aval-header { flex-direction: column; }
+    .aval-score-box { flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; }
+    .hero-btns { flex-direction: column; }
+    .btn-gold, .btn-outline { justify-content: center; }
+    .agendar-btn { width: 100%; justify-content: center; }
+    .loc-social { flex-direction: column; }
+    .section-h2 { font-size: clamp(26px, 6vw, 40px); }
+    .diferenciais-grid { gap: 32px; }
+    .diff-img-main { height: 320px; }
+    .diff-img-badge { display: none; }
+    .galeria-intro { flex-direction: column; }
+    .medico-card { padding: 24px; }
+    .modal-header-info h2 { font-size: 22px; }
   }
 
   /* ── MODAL ── */
@@ -778,10 +1059,25 @@
     <li><a href="#medicos" data-i18n="nav_team">Equipe</a></li>
     <li><a href="#clinica" data-i18n="nav_clinic">Clínica</a></li>
     <li><a href="#servicos" data-i18n="nav_services">Serviços</a></li>
+    <li><a href="#avaliacoes" data-i18n="nav_aval">Avaliações</a></li>
     <li><a href="#localizacao" data-i18n="nav_loc">Localização</a></li>
   </ul>
   <a href="https://wa.me/5517997760055" target="_blank" class="nav-cta" data-i18n="nav_cta">Agendar Consulta</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="#diferenciais" data-i18n="nav_diff" onclick="closeMobileMenu()">Diferenciais</a>
+  <a href="#medicos" data-i18n="nav_team" onclick="closeMobileMenu()">Equipe</a>
+  <a href="#clinica" data-i18n="nav_clinic" onclick="closeMobileMenu()">Clínica</a>
+  <a href="#servicos" data-i18n="nav_services" onclick="closeMobileMenu()">Serviços</a>
+  <a href="#avaliacoes" data-i18n="nav_aval" onclick="closeMobileMenu()">Avaliações</a>
+  <a href="#localizacao" data-i18n="nav_loc" onclick="closeMobileMenu()">Localização</a>
+  <a href="https://wa.me/5517997760055?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20no%20IORE." target="_blank" class="nav-mobile-cta" onclick="closeMobileMenu()" data-i18n="nav_cta">Agendar Consulta</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -865,7 +1161,7 @@
       <!-- Dr. Bruno -->
       <div class="medico-card" onclick="openModal('bruno')" style="cursor:pointer">
         <div class="medico-avatar">
-          <span style="font-size:36px">👨‍⚕️</span>
+          <span style="font-size:36px">BL</span>
         </div>
         <div class="medico-info">
           <h3>Dr. Bruno Leite</h3>
@@ -885,7 +1181,7 @@
       <!-- Dra. Tamiris -->
       <div class="medico-card" onclick="openModal('tamiris')" style="cursor:pointer">
         <div class="medico-avatar">
-          <span style="font-size:36px">👩‍⚕️</span>
+          <span style="font-size:36px">TA</span>
         </div>
         <div class="medico-info">
           <h3>Dra. Tamiris Armenine</h3>
@@ -984,6 +1280,164 @@
   </div>
 </section>
 
+<!-- AVALIAÇÕES -->
+<section id="avaliacoes">
+  <div class="container">
+    <div class="aval-header reveal">
+      <div>
+        <div class="section-tag">O que dizem nossos pacientes</div>
+        <h2 class="section-h2">Avaliações &amp; <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold)">Depoimentos</em></h2>
+        <p class="section-lead">Cada sorriso transformado é a nossa maior conquista. Veja o que nossos pacientes compartilham sobre a experiência no IORE.</p>
+      </div>
+      <div class="aval-score-box">
+        <div class="aval-score-num">5.0</div>
+        <div>
+          <div class="aval-score-stars">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="aval-score-label">Avaliação média dos pacientes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Depoimentos fixos -->
+    <div class="aval-grid reveal" id="aval-depoimentos">
+      <div class="aval-card">
+        <div class="aval-stars">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="aval-text">Fiz meus implantes com o Dr. Bruno e o resultado superou todas as expectativas. Profissional impecável, atencioso em cada detalhe. O consultório é lindo e o atendimento é acolhedor do início ao fim.</p>
+        <div class="aval-author">
+          <div class="aval-avatar">MR</div>
+          <div>
+            <div class="aval-name">Maria Regina S.</div>
+            <div class="aval-meta">Paciente · Implantodontia</div>
+            <span class="aval-tags-chip">Implantes</span>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card">
+        <div class="aval-stars">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="aval-text">A Dra. Tamiris transformou meu sorriso com facetas de porcelana. Ela é extremamente cuidadosa, artista de verdade. Me sinto muito mais confiante. O ambiente da clínica é sofisticado e aconchegante.</p>
+        <div class="aval-author">
+          <div class="aval-avatar">AC</div>
+          <div>
+            <div class="aval-name">Ana Carolina F.</div>
+            <div class="aval-meta">Paciente · Estética Dental</div>
+            <span class="aval-tags-chip">Facetas</span>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card">
+        <div class="aval-stars">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="aval-text">Atendimento de altíssimo nível. Desde a recepção até o consultório, tudo com muita organização e simpatia. O Dr. Bruno me deixou totalmente tranquilo durante a cirurgia. Indico de olhos fechados!</p>
+        <div class="aval-author">
+          <div class="aval-avatar">JP</div>
+          <div>
+            <div class="aval-name">João Paulo M.</div>
+            <div class="aval-meta">Paciente · Cirurgia Oral</div>
+            <span class="aval-tags-chip">Cirurgia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulário de Avaliação -->
+    <div class="aval-form-wrap reveal">
+      <div id="aval-form-content">
+        <h3 class="aval-form-title">Deixe sua avaliação</h3>
+        <p class="aval-form-sub">Sua opinião nos ajuda a melhorar e orienta novos pacientes. Agradecemos por compartilhar sua experiência!</p>
+
+        <div class="aval-criteria">
+          <div class="aval-criterion">
+            <label>🏥 Local / Estrutura</label>
+            <div class="star-row" data-criterion="local">
+              <button class="star-btn" data-val="1" onclick="setStars('local',1)" aria-label="1 estrela"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="2" onclick="setStars('local',2)" aria-label="2 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="3" onclick="setStars('local',3)" aria-label="3 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="4" onclick="setStars('local',4)" aria-label="4 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="5" onclick="setStars('local',5)" aria-label="5 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+            </div>
+          </div>
+          <div class="aval-criterion">
+            <label>⚕️ Serviço / Tratamento</label>
+            <div class="star-row" data-criterion="servico">
+              <button class="star-btn" data-val="1" onclick="setStars('servico',1)" aria-label="1 estrela"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="2" onclick="setStars('servico',2)" aria-label="2 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="3" onclick="setStars('servico',3)" aria-label="3 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="4" onclick="setStars('servico',4)" aria-label="4 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="5" onclick="setStars('servico',5)" aria-label="5 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+            </div>
+          </div>
+          <div class="aval-criterion">
+            <label>🤝 Atendimento</label>
+            <div class="star-row" data-criterion="atendimento">
+              <button class="star-btn" data-val="1" onclick="setStars('atendimento',1)" aria-label="1 estrela"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="2" onclick="setStars('atendimento',2)" aria-label="2 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="3" onclick="setStars('atendimento',3)" aria-label="3 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="4" onclick="setStars('atendimento',4)" aria-label="4 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+              <button class="star-btn" data-val="5" onclick="setStars('atendimento',5)" aria-label="5 estrelas"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#e0d5c0" stroke="var(--gold)" stroke-width=".5"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="aval-fields-row">
+          <div class="aval-field">
+            <label>Seu nome</label>
+            <input type="text" id="aval-nome" placeholder="Ex: Maria Silva" />
+          </div>
+          <div class="aval-field">
+            <label>Tratamento realizado</label>
+            <select id="aval-tratamento">
+              <option value="">Selecione...</option>
+              <option>Implante Dentário</option>
+              <option>Facetas / Lentes de Contato</option>
+              <option>Clareamento Dental</option>
+              <option>Reabilitação Oral</option>
+              <option>Cirurgia Oral</option>
+              <option>Odontopediatria</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+        <div class="aval-field">
+          <label>Seu depoimento</label>
+          <textarea id="aval-texto" rows="4" placeholder="Conte como foi sua experiência no IORE..."></textarea>
+        </div>
+        <button class="aval-submit" onclick="enviarAvaliacao()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Enviar Avaliação
+        </button>
+      </div>
+      <div class="aval-success" id="aval-success">
+        <div class="aval-success-icon">🌟</div>
+        <h3>Obrigado pela sua avaliação!</h3>
+        <p>Sua opinião é muito importante para o IORE.<br>Agradecemos por compartilhar sua experiência conosco.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- AGENDAMENTO CTA -->
 <section id="agendamento">
   <div class="agendar-box reveal">
@@ -1076,7 +1530,7 @@ const translations = {
   pt: {
     lang_label: "Idioma:", nav_sub: "Odontologia Premium",
     nav_diff: "Diferenciais", nav_team: "Equipe", nav_clinic: "Clínica",
-    nav_services: "Serviços", nav_loc: "Localização", nav_cta: "Agendar Consulta",
+    nav_services: "Serviços", nav_aval: "Avaliações", nav_loc: "Localização", nav_cta: "Agendar Consulta",
     hero_badge: "Excelência em Odontologia",
     hero_h1: "Seu sorriso <em>merece</em><br>o melhor cuidado.",
     hero_sub: "No IORE unimos tecnologia de ponta, estética refinada e acolhimento humano para transformar a sua saúde bucal com conforto e precisão.",
@@ -1358,6 +1812,77 @@ function closeGalItem() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGalItem(); });
+</script>
+
+<script>
+// ── HAMBURGER MENU ──
+function closeMobileMenu() {
+  document.getElementById('nav-hamburger').classList.remove('open');
+  document.getElementById('nav-mobile-menu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('nav-hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('nav-mobile-menu').classList.toggle('open');
+  document.body.style.overflow = this.classList.contains('open') ? 'hidden' : '';
+});
+</script>
+
+<script>
+// ── STAR RATING SYSTEM ──
+const goldFill = 'var(--gold)';
+const emptyFill = '#e0d5c0';
+
+function setStars(criterion, val) {
+  ratings[criterion] = val;
+  const row = document.querySelector(`.star-row[data-criterion="${criterion}"]`);
+  if (!row) return;
+  row.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.querySelector('path').setAttribute('fill', i < val ? goldFill : emptyFill);
+  });
+}
+
+function enviarAvaliacao() {
+  const nome = document.getElementById('aval-nome').value.trim();
+  const tratamento = document.getElementById('aval-tratamento').value;
+  const texto = document.getElementById('aval-texto').value.trim();
+
+  if (!nome) { alert('Por favor, informe seu nome.'); return; }
+  if (!ratings.local && !ratings.servico && !ratings.atendimento) {
+    alert('Por favor, avalie pelo menos um critério.'); return;
+  }
+  if (!texto) { alert('Por favor, escreva um breve depoimento.'); return; }
+
+  // Adiciona o card dinamicamente
+  const iniciais = nome.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
+  const media = Math.round((ratings.local + ratings.servico + ratings.atendimento) /
+    [ratings.local, ratings.servico, ratings.atendimento].filter(v=>v>0).length);
+  const stars = Array.from({length:5}, (_,i) =>
+    `<svg width="16" height="16" fill="${i<media?'var(--gold)':'#e0d5c0'}" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+  ).join('');
+
+  const card = document.createElement('div');
+  card.className = 'aval-card';
+  card.style.animation = 'fadeUp .6s ease both';
+  card.innerHTML = `
+    <div class="aval-stars">${stars}</div>
+    <p class="aval-text">${texto}</p>
+    <div class="aval-author">
+      <div class="aval-avatar">${iniciais}</div>
+      <div>
+        <div class="aval-name">${nome}</div>
+        <div class="aval-meta">Paciente${tratamento ? ' · ' + tratamento : ''}</div>
+        ${tratamento ? `<span class="aval-tags-chip">${tratamento}</span>` : ''}
+      </div>
+    </div>`;
+
+  const grid = document.getElementById('aval-depoimentos');
+  grid.insertBefore(card, grid.firstChild);
+
+  // Mostra mensagem de sucesso
+  document.getElementById('aval-form-content').style.display = 'none';
+  document.getElementById('aval-success').style.display = 'block';
+}
 </script>
 </body>
 </html>
