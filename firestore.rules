@@ -1,0 +1,74 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function validTreatment(treatment) {
+      return treatment is string
+        && treatment in [
+          "",
+          "Implante Dentário",
+          "Facetas / Lentes de Contato",
+          "Clareamento Dental",
+          "Reabilitação Oral",
+          "Cirurgia Oral",
+          "Odontopediatria",
+          "Outro"
+        ];
+    }
+
+    function validRating(value) {
+      return (value is int || value is float)
+        && value >= 0
+        && value <= 5;
+    }
+
+    function validReviewShape(data) {
+      return data.keys().hasOnly([
+          "nome",
+          "tratamento",
+          "comentario",
+          "estrelas",
+          "local",
+          "servico",
+          "atendimento",
+          "status",
+          "data"
+        ])
+        && data.nome is string
+        && data.nome.size() >= 2
+        && data.nome.size() <= 80
+        && data.comentario is string
+        && data.comentario.size() >= 10
+        && data.comentario.size() <= 600
+        && validTreatment(data.tratamento)
+        && validRating(data.estrelas)
+        && data.estrelas >= 1
+        && validRating(data.local)
+        && validRating(data.servico)
+        && validRating(data.atendimento)
+        && data.data is timestamp;
+    }
+
+    function validPublicReview(data) {
+      return validReviewShape(data)
+        && data.status in ["approved", "pending"]
+        && data.data == request.time;
+    }
+
+    function validPublicReviewQuery() {
+      return request.query.limit != null
+        && request.query.limit <= 50;
+    }
+
+    match /avaliacoes/{reviewId} {
+      allow get: if false;
+      allow list: if validPublicReviewQuery();
+      allow create: if validPublicReview(request.resource.data);
+      allow update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://vlibras.gov.br; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com; frame-src https://vlibras.gov.br https://maps.google.com https://www.google.com; form-action 'self'; upgrade-insecure-requests">
 <title>IORE – Instituto Odontológico de Reabilitação e Estética</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -640,6 +642,45 @@
   .aval-score-stars { display: flex; gap: 4px; margin-bottom: 6px; }
   .aval-score-stars svg { color: var(--gold); }
   .aval-score-label { font-size: 13px; color: var(--muted); }
+  .aval-google-actions {
+    margin-top: 22px;
+  }
+  .google-review-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--navy);
+    color: white;
+    border: 1px solid rgba(201,168,76,.35);
+    padding: 14px 24px;
+    border-radius: 40px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    text-decoration: none;
+    transition: .25s;
+  }
+  .google-review-btn:hover {
+    background: var(--dark);
+    color: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(13,30,59,.22);
+  }
+  .google-review-btn svg {
+    flex-shrink: 0;
+  }
+  .aval-empty {
+    grid-column: 1 / -1;
+    background: white;
+    border: 1px solid rgba(201,168,76,.18);
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+  }
 
   .aval-grid {
     display: grid;
@@ -783,6 +824,20 @@
     margin-top: 8px;
   }
   .aval-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.35); }
+  .aval-submit:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .aval-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
   .aval-success {
     display: none;
     text-align: center;
@@ -796,13 +851,30 @@
     font-size: 28px; color: var(--navy); margin-bottom: 10px;
   }
   .aval-success p { font-size: 15px; color: var(--muted); }
+  .aval-success .google-review-btn {
+    margin-top: 22px;
+  }
 
   @media (max-width: 768px) {
     .aval-grid { grid-template-columns: 1fr; }
     .aval-criteria { grid-template-columns: 1fr; }
     .aval-form-wrap { padding: 32px 24px; }
     .aval-fields-row { grid-template-columns: 1fr; }
-    .aval-header { flex-direction: column; }
+    .aval-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .aval-header > div:first-child,
+    .aval-google-actions {
+      width: 100%;
+    }
+    .aval-google-actions {
+      display: block;
+    }
+    .google-review-btn {
+      width: 100%;
+      min-height: 52px;
+    }
   }
 
   /* ── FOOTER ── */
@@ -868,7 +940,7 @@
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
     background: rgba(12,19,35,.97);
-    z-index: 950;
+    z-index: 850;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -902,18 +974,38 @@
     .nav-links, .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
     section { padding: 70px 20px; }
+    #hero { min-height: auto; align-items: flex-start; padding-top: 104px; }
     .hero-grid, .diferenciais-grid, .medicos-grid,
     .loc-grid { grid-template-columns: 1fr; }
+    .hero-grid { padding: 42px 24px 56px; gap: 32px; }
     .diff-cards { grid-template-columns: 1fr 1fr; }
     .servicos-grid { grid-template-columns: 1fr 1fr; }
     .galeria-mosaic { grid-template-columns: 1fr 1fr; }
     .gal-item:nth-child(1), .gal-item:nth-child(4) { grid-column: auto; grid-row: auto; }
     .hero-left { padding-right: 0; }
-    .hero-img-float, .hero-stats { display: none; }
+    .hero-right { width: 100%; }
+    .hero-img-main { height: 380px; border-radius: 20px 20px 48px 20px; }
+    .hero-img-float {
+      display: block;
+      width: 150px;
+      height: 150px;
+      left: 16px;
+      bottom: 16px;
+      border-width: 3px;
+      border-radius: 18px;
+    }
+    .hero-stats { display: none; }
     .diff-img-badge { right: 16px; }
+    .servicos-grid, .loc-grid, .medicos-grid, .diferenciais-grid { margin-top: 44px; }
+    .galeria-intro { margin-bottom: 36px; }
+    .gal-item img,
+    .gal-item:nth-child(1) img,
+    .gal-item:nth-child(4) img { height: 240px; }
+    #agendamento, #avaliacoes { padding: 70px 20px; }
     .agendar-options { flex-direction: column; align-items: center; }
     .medico-card { flex-direction: column; align-items: flex-start; }
     .hero-h1 { font-size: clamp(32px, 8vw, 52px); }
+    .map-frame { height: 340px; border-radius: 18px; }
     .modal-header { padding: 32px 24px 24px; flex-direction: column; gap: 16px; }
     .modal-body { padding: 24px; }
     .modal-box { border-radius: 20px; max-height: 95vh; }
@@ -921,26 +1013,75 @@
 
   @media (max-width: 600px) {
     #lang-bar { padding: 5px 16px; font-size: 11px; }
+    nav { top: 30px; height: 68px; padding: 0 16px; }
+    .nav-logo { gap: 8px; min-width: 0; }
+    .nav-logo-icon { width: 46px !important; height: 46px !important; flex-shrink: 0; }
+    .nav-logo-text { font-size: 19px; }
+    .nav-logo-sub { font-size: 8px; letter-spacing: .09em; }
+    #hero { padding-top: 98px; }
+    .hero-grid { padding: 34px 22px 44px; gap: 26px; }
+    .hero-left > img:first-child { display: none !important; }
+    .hero-badge {
+      width: 100%;
+      justify-content: center;
+      padding: 10px 14px;
+      margin-bottom: 24px;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .hero-h1 { font-size: 38px; line-height: 1.05; margin-bottom: 20px; }
+    .hero-sub { font-size: 15px; line-height: 1.65; max-width: none; margin-bottom: 28px; }
+    .hero-btns { width: 100%; gap: 12px; flex-direction: column; }
+    .btn-gold, .btn-outline {
+      width: 100%;
+      min-height: 54px;
+      justify-content: center;
+      padding: 0 20px;
+      border-radius: 32px;
+    }
+    .hero-img-main { height: 320px; border-radius: 18px 18px 40px 18px; }
+    .hero-img-float { width: 122px; height: 122px; left: 14px; bottom: 14px; border-radius: 16px; }
     .diff-cards, .servicos-grid { grid-template-columns: 1fr; }
     .galeria-mosaic { grid-template-columns: 1fr; }
     section { padding: 60px 16px; }
+    #agendamento, #avaliacoes { padding: 60px 18px; }
     .aval-grid { grid-template-columns: 1fr; }
     .aval-criteria { grid-template-columns: 1fr; }
-    .aval-form-wrap { padding: 28px 20px; }
+    .aval-form-wrap { width: 100%; padding: 28px 20px; border-radius: 20px; }
     .aval-fields-row { grid-template-columns: 1fr; }
-    .aval-header { flex-direction: column; }
-    .aval-score-box { flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; }
-    .hero-btns { flex-direction: column; }
-    .btn-gold, .btn-outline { justify-content: center; }
+    .aval-header { flex-direction: column; gap: 22px; margin-bottom: 36px; }
+    .aval-score-box { width: 100%; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px; }
+    .star-row { flex-wrap: nowrap; gap: 4px; }
+    .star-btn svg { width: 24px; height: 24px; }
+    .aval-submit { width: 100%; justify-content: center; }
+    .aval-success .google-review-btn { width: 100%; }
     .agendar-btn { width: 100%; justify-content: center; }
     .loc-social { flex-direction: column; }
-    .section-h2 { font-size: clamp(26px, 6vw, 40px); }
+    .section-h2 { font-size: 32px; }
+    .section-lead { font-size: 15px; line-height: 1.65; }
     .diferenciais-grid { gap: 32px; }
     .diff-img-main { height: 320px; }
     .diff-img-badge { display: none; }
     .galeria-intro { flex-direction: column; }
-    .medico-card { padding: 24px; }
+    .diff-card, .servico-card, .aval-card { padding: 24px 22px; border-radius: 16px; }
+    .medico-card { padding: 22px; gap: 18px; border-radius: 18px; }
+    .medico-avatar { width: 80px; height: 80px; }
+    .gal-item img,
+    .gal-item:nth-child(1) img,
+    .gal-item:nth-child(4) img { height: 220px; }
+    .loc-grid { gap: 34px; }
+    .map-frame { height: 280px; }
+    .nav-mobile-menu { gap: 24px; padding: 112px 24px 38px; }
+    .nav-mobile-menu a { font-size: 20px; }
     .modal-header-info h2 { font-size: 22px; }
+  }
+
+  @media (max-width: 380px) {
+    .lang-btn { padding: 3px 9px; }
+    .hero-grid { padding-left: 18px; padding-right: 18px; }
+    .hero-h1 { font-size: 34px; }
+    .hero-img-main { height: 290px; }
+    .hero-img-float { width: 110px; height: 110px; }
   }
 
   /* ── MODAL ── */
@@ -1035,7 +1176,13 @@
   </div>
 </div>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+<script>
+window.addEventListener('load', () => {
+  if (window.VLibras?.Widget) {
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  }
+});
+</script>
 
 <!-- Language Bar -->
 <div id="lang-bar">
@@ -1279,7 +1426,6 @@
     </div>
   </div>
 </section>
-
 <!-- AVALIAÇÕES -->
 <section id="avaliacoes">
   <div class="container">
@@ -1288,80 +1434,24 @@
         <div class="section-tag">O que dizem nossos pacientes</div>
         <h2 class="section-h2">Avaliações &amp; <em style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold)">Depoimentos</em></h2>
         <p class="section-lead">Cada sorriso transformado é a nossa maior conquista. Veja o que nossos pacientes compartilham sobre a experiência no IORE.</p>
+        <div class="aval-google-actions">
+          <a class="google-review-btn" data-google-review-link href="https://search.google.com/local/writereview?placeid=ChIJZSboHiS_vZQR1ZeLt0HT13g" target="_blank" rel="noopener noreferrer" aria-label="Avaliar a IORE no Google">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Avaliar no Google
+          </a>
+        </div>
       </div>
       <div class="aval-score-box">
-        <div class="aval-score-num">5.0</div>
+        <div class="aval-score-num" id="aval-score-num">0.0</div>
         <div>
-          <div class="aval-score-stars">
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <div class="aval-score-label">Avaliação média dos pacientes</div>
+          <div class="aval-score-stars" id="aval-score-stars" aria-label="Média 0 de 5"></div>
+          <div class="aval-score-label" id="aval-score-label">Média calculada pelas avaliações reais</div>
         </div>
       </div>
     </div>
-
-    <!-- Depoimentos fixos -->
-    <div class="aval-grid reveal" id="aval-depoimentos">
-      <div class="aval-card">
-        <div class="aval-stars">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="aval-text">Fiz meus implantes com o Dr. Bruno e o resultado superou todas as expectativas. Profissional impecável, atencioso em cada detalhe. O consultório é lindo e o atendimento é acolhedor do início ao fim.</p>
-        <div class="aval-author">
-          <div class="aval-avatar">MR</div>
-          <div>
-            <div class="aval-name">Maria Regina S.</div>
-            <div class="aval-meta">Paciente · Implantodontia</div>
-            <span class="aval-tags-chip">Implantes</span>
-          </div>
-        </div>
-      </div>
-      <div class="aval-card">
-        <div class="aval-stars">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="aval-text">A Dra. Tamiris transformou meu sorriso com facetas de porcelana. Ela é extremamente cuidadosa, artista de verdade. Me sinto muito mais confiante. O ambiente da clínica é sofisticado e aconchegante.</p>
-        <div class="aval-author">
-          <div class="aval-avatar">AC</div>
-          <div>
-            <div class="aval-name">Ana Carolina F.</div>
-            <div class="aval-meta">Paciente · Estética Dental</div>
-            <span class="aval-tags-chip">Facetas</span>
-          </div>
-        </div>
-      </div>
-      <div class="aval-card">
-        <div class="aval-stars">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        </div>
-        <p class="aval-text">Atendimento de altíssimo nível. Desde a recepção até o consultório, tudo com muita organização e simpatia. O Dr. Bruno me deixou totalmente tranquilo durante a cirurgia. Indico de olhos fechados!</p>
-        <div class="aval-author">
-          <div class="aval-avatar">JP</div>
-          <div>
-            <div class="aval-name">João Paulo M.</div>
-            <div class="aval-meta">Paciente · Cirurgia Oral</div>
-            <span class="aval-tags-chip">Cirurgia</span>
-          </div>
-        </div>
-      </div>
+    <div class="aval-grid reveal" id="aval-depoimentos" aria-live="polite">
+      <div class="aval-empty">Carregando avaliações...</div>
     </div>
-
     <!-- Formulário de Avaliação -->
     <div class="aval-form-wrap reveal">
       <div id="aval-form-content">
@@ -1404,7 +1494,7 @@
         <div class="aval-fields-row">
           <div class="aval-field">
             <label>Seu nome</label>
-            <input type="text" id="aval-nome" placeholder="Ex: Maria Silva" />
+            <input type="text" id="aval-nome" placeholder="Ex: Maria Silva" maxlength="80" autocomplete="name" required />
           </div>
           <div class="aval-field">
             <label>Tratamento realizado</label>
@@ -1422,9 +1512,10 @@
         </div>
         <div class="aval-field">
           <label>Seu depoimento</label>
-          <textarea id="aval-texto" rows="4" placeholder="Conte como foi sua experiência no IORE..."></textarea>
+          <textarea id="aval-texto" rows="4" placeholder="Conte como foi sua experiência no IORE..." maxlength="600" required></textarea>
         </div>
-        <button class="aval-submit" onclick="enviarAvaliacao()">
+        <input type="text" id="aval-site" class="aval-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="button" class="aval-submit" onclick="enviarAvaliacao()">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           Enviar Avaliação
         </button>
@@ -1432,7 +1523,12 @@
       <div class="aval-success" id="aval-success">
         <div class="aval-success-icon">🌟</div>
         <h3>Obrigado pela sua avaliação!</h3>
-        <p>Sua opinião é muito importante para o IORE.<br>Agradecemos por compartilhar sua experiência conosco.</p>
+        <p>Sua opinião é muito importante para o IORE.<br>Ela aparecerá no site em instantes.</p>
+        <p>Ajude tamb&eacute;m outras pessoas a conhecerem a cl&iacute;nica deixando sua avalia&ccedil;&atilde;o no Google.</p>
+        <a class="google-review-btn" data-google-review-link href="https://search.google.com/local/writereview?placeid=ChIJZSboHiS_vZQR1ZeLt0HT13g" target="_blank" rel="noopener noreferrer" aria-label="Avaliar a IORE no Google">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Avaliar no Google
+        </a>
       </div>
     </div>
   </div>
@@ -1504,8 +1600,9 @@
       </div>
       <div class="map-frame reveal">
         <iframe
-          src="https://maps.google.com/maps?q=R.+Donato+Vissechi,+447,+José+Bonifácio+-+SP,+15200-000&output=embed"
-          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          title="Mapa da IORE Odontologia"
+          src="https://www.google.com/maps?q=R.%20Donato%20Vissechi%2C%20447%2C%20Jos%C3%A9%20Bonif%C3%A1cio%20-%20SP%2C%2015200-000&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
       </div>
     </div>
@@ -1525,6 +1622,11 @@
 </footer>
 
 <script>
+const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJZSboHiS_vZQR1ZeLt0HT13g";
+document.querySelectorAll("[data-google-review-link]").forEach(link => {
+  link.href = GOOGLE_REVIEW_URL;
+});
+
 // ── TRANSLATIONS ──
 const translations = {
   pt: {
@@ -1829,172 +1931,349 @@ document.getElementById('nav-hamburger').addEventListener('click', function() {
 </script>
 
 <script>
-// ── STAR RATING SYSTEM ──
-const goldFill = 'var(--gold)';
-const emptyFill = '#e0d5c0';
+// ── AVALIAÇÕES: estrelas e envio com Firebase ──
 
+// Objeto para armazenar as notas dos três critérios
+window.reviewRatings = { local: 0, servico: 0, atendimento: 0 };
+
+// Pinta as estrelas do critério selecionado
 function setStars(criterion, val) {
-  ratings[criterion] = val;
+  const ratings = window.reviewRatings;
+  if (!Object.prototype.hasOwnProperty.call(ratings, criterion)) return;
+  const rating = Math.max(1, Math.min(5, Number.parseInt(val, 10) || 0));
+  ratings[criterion] = rating;
   const row = document.querySelector(`.star-row[data-criterion="${criterion}"]`);
   if (!row) return;
   row.querySelectorAll('.star-btn').forEach((btn, i) => {
-    btn.querySelector('path').setAttribute('fill', i < val ? goldFill : emptyFill);
+    btn.querySelector('path').setAttribute('fill', i < rating ? 'var(--gold)' : '#e0d5c0');
   });
 }
 
-function enviarAvaliacao() {
-  const nome = document.getElementById('aval-nome').value.trim();
-  const tratamento = document.getElementById('aval-tratamento').value;
-  const texto = document.getElementById('aval-texto').value.trim();
-
-  if (!nome) { alert('Por favor, informe seu nome.'); return; }
-  if (!ratings.local && !ratings.servico && !ratings.atendimento) {
-    alert('Por favor, avalie pelo menos um critério.'); return;
-  }
-  if (!texto) { alert('Por favor, escreva um breve depoimento.'); return; }
-
-  // Adiciona o card dinamicamente
-  const iniciais = nome.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
-  const media = Math.round((ratings.local + ratings.servico + ratings.atendimento) /
-    [ratings.local, ratings.servico, ratings.atendimento].filter(v=>v>0).length);
-  const stars = Array.from({length:5}, (_,i) =>
-    `<svg width="16" height="16" fill="${i<media?'var(--gold)':'#e0d5c0'}" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
-  ).join('');
-
-  const card = document.createElement('div');
-  card.className = 'aval-card';
-  card.style.animation = 'fadeUp .6s ease both';
-  card.innerHTML = `
-    <div class="aval-stars">${stars}</div>
-    <p class="aval-text">${texto}</p>
-    <div class="aval-author">
-      <div class="aval-avatar">${iniciais}</div>
-      <div>
-        <div class="aval-name">${nome}</div>
-        <div class="aval-meta">Paciente${tratamento ? ' · ' + tratamento : ''}</div>
-        ${tratamento ? `<span class="aval-tags-chip">${tratamento}</span>` : ''}
-      </div>
-    </div>`;
-
-  const grid = document.getElementById('aval-depoimentos');
-  grid.insertBefore(card, grid.firstChild);
-
-  // Mostra mensagem de sucesso
-  document.getElementById('aval-form-content').style.display = 'none';
-  document.getElementById('aval-success').style.display = 'block';
-}
+window.setStars = setStars;
 </script>
-<script>
-  // Objeto para armazenar as notas
-  const ratings = { local: 0, servico: 0, atendimento: 0 };
 
-  // Função chamada ao clicar nas estrelas
-  function setStars(criterion, value) {
-    ratings[criterion] = value;
-    
-    // Seleciona a linha de estrelas correspondente
-    const container = document.querySelector(`.star-row[data-criterion="${criterion}"]`);
-    if (!container) return;
-    
-    const buttons = container.querySelectorAll('.star-btn');
-    
-    // Pinta as estrelas
-    buttons.forEach((btn, index) => {
-      const svgPath = btn.querySelector('path');
-      if (index < value) {
-        svgPath.setAttribute('fill', 'var(--gold)');
-      } else {
-        svgPath.setAttribute('fill', '#e0d5c0');
-      }
-    });
-  }
-</script>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // Sua configuração (já preenchida)
     const firebaseConfig = {
         apiKey: "AIzaSyDc2R6nRRVxHBQy_yA2kIFZ-mj-b5mvMYE",
         authDomain: "iore-d7e47.firebaseapp.com",
         projectId: "iore-d7e47",
         storageBucket: "iore-d7e47.firebasestorage.app",
         messagingSenderId: "898265868169",
-        appId: "1:898265868169:web:66f32c2f62b8ef94ffa358",
-        measurementId: "G-5FB89LR3CD"
+        appId: "1:898265868169:web:66f32c2f62b8ef94ffa358"
     };
 
-    // Inicializa Firebase e Firestore
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- Lógica das Estrelas ---
-    let selectedRating = 0;
-    const stars = document.querySelectorAll('.star-rating i');
-    
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            selectedRating = star.getAttribute('data-value');
-            updateStars(selectedRating);
-        });
-    });
+    const REVIEW_DISPLAY_LIMIT = 12;
+    const REVIEW_STATS_LIMIT = 50;
+    const MAX_NAME_LENGTH = 80;
+    const MAX_COMMENT_LENGTH = 600;
+    const STAR_PATH = "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z";
+    const ALLOWED_TREATMENTS = new Set([
+        "",
+        "Implante Dentário",
+        "Facetas / Lentes de Contato",
+        "Clareamento Dental",
+        "Reabilitação Oral",
+        "Cirurgia Oral",
+        "Odontopediatria",
+        "Outro"
+    ]);
 
-    function updateStars(rating) {
-        stars.forEach(star => {
-            star.classList.toggle('active', star.getAttribute('data-value') <= rating);
-        });
+    let isSendingReview = false;
+
+    function cleanText(value, maxLength) {
+        return String(value || "").replace(/\s+/g, " ").trim().slice(0, maxLength);
     }
 
-    // --- Enviar Avaliação para o Firebase ---
-    window.enviarAvaliacao = async function() {
-        const nome = document.getElementById('nome-usuario').value;
-        const comentario = document.getElementById('comentario-usuario').value;
+    function normalizeRating(value) {
+        const rating = Number.parseInt(value, 10);
+        return Number.isInteger(rating) && rating >= 0 && rating <= 5 ? rating : 0;
+    }
 
-        if (!nome || !comentario || selectedRating === 0) {
-            alert("Por favor, preencha todos os campos e escolha as estrelas!");
+    function normalizeScore(value) {
+        const score = Number(value);
+        return Number.isFinite(score) && score >= 0 && score <= 5 ? score : 0;
+    }
+
+    function normalizeTreatment(value) {
+        const treatment = cleanText(value, 60);
+        return ALLOWED_TREATMENTS.has(treatment) ? treatment : "";
+    }
+
+    function averageRatings() {
+        const ratings = window.reviewRatings || {};
+        const values = [ratings.local, ratings.servico, ratings.atendimento]
+            .map(normalizeRating)
+            .filter(value => value > 0);
+        if (!values.length) return 0;
+        return Number((values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(1));
+    }
+
+    function getReviewScore(review) {
+        const values = [review?.local, review?.servico, review?.atendimento]
+            .map(normalizeRating)
+            .filter(value => value > 0);
+        if (values.length) {
+            return values.reduce((sum, value) => sum + value, 0) / values.length;
+        }
+        return normalizeScore(review?.estrelas);
+    }
+
+    function getReviewStars(review) {
+        return Math.round(getReviewScore(review));
+    }
+
+    function isDisplayableReview(review) {
+        const name = cleanText(review?.nome, MAX_NAME_LENGTH);
+        const comment = cleanText(review?.comentario, MAX_COMMENT_LENGTH);
+        return name.length >= 2 && comment.length >= 10 && getReviewScore(review) >= 1;
+    }
+
+    function getInitials(name) {
+        const initials = cleanText(name, MAX_NAME_LENGTH)
+            .split(/\s+/)
+            .filter(Boolean)
+            .map(word => word[0])
+            .slice(0, 2)
+            .join("")
+            .toUpperCase();
+        return initials || "IO";
+    }
+
+    function renderStars(container, rating) {
+        const safeRating = normalizeRating(rating);
+        for (let i = 0; i < 5; i++) {
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "16");
+            svg.setAttribute("height", "16");
+            svg.setAttribute("viewBox", "0 0 24 24");
+            svg.setAttribute("aria-hidden", "true");
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", STAR_PATH);
+            path.setAttribute("fill", i < safeRating ? "var(--gold)" : "#e0d5c0");
+            svg.appendChild(path);
+            container.appendChild(svg);
+        }
+    }
+
+    function renderAverageStars(container, score) {
+        if (!container) return;
+        const safeScore = Math.max(0, Math.min(5, normalizeScore(score)));
+        container.replaceChildren();
+        container.setAttribute("aria-label", `M\u00e9dia ${safeScore.toFixed(1)} de 5`);
+
+        for (let i = 0; i < 5; i++) {
+            const fillPercent = Math.max(0, Math.min(1, safeScore - i)) * 100;
+            const gradientId = `aval-score-star-${i}-${Math.round(safeScore * 10)}`;
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("width", "22");
+            svg.setAttribute("height", "22");
+            svg.setAttribute("viewBox", "0 0 24 24");
+            svg.setAttribute("aria-hidden", "true");
+
+            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+            const gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+            gradient.setAttribute("id", gradientId);
+            gradient.setAttribute("x1", "0%");
+            gradient.setAttribute("x2", "100%");
+
+            const goldStart = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            goldStart.setAttribute("offset", `${fillPercent}%`);
+            goldStart.setAttribute("stop-color", "#c9a84c");
+            const emptyStart = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+            emptyStart.setAttribute("offset", `${fillPercent}%`);
+            emptyStart.setAttribute("stop-color", "#e0d5c0");
+
+            gradient.append(goldStart, emptyStart);
+            defs.appendChild(gradient);
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", STAR_PATH);
+            path.setAttribute("fill", `url(#${gradientId})`);
+            svg.append(defs, path);
+            container.appendChild(svg);
+        }
+    }
+
+    function createEmptyReviewState(message) {
+        const empty = document.createElement("div");
+        empty.className = "aval-empty";
+        empty.textContent = message;
+        return empty;
+    }
+
+    function updateReviewSummary(reviews) {
+        const scoreNum = document.getElementById("aval-score-num");
+        const starsContainer = document.getElementById("aval-score-stars");
+        const scoreLabel = document.getElementById("aval-score-label");
+        const scores = reviews.map(getReviewScore).filter(score => score > 0);
+        const averageScore = scores.length
+            ? scores.reduce((sum, score) => sum + score, 0) / scores.length
+            : 0;
+
+        if (scoreNum) scoreNum.textContent = averageScore.toFixed(1);
+        renderAverageStars(starsContainer, averageScore);
+        if (scoreLabel) {
+            scoreLabel.textContent = scores.length === 1
+                ? "1 avalia\u00e7\u00e3o real publicada"
+                : `${scores.length} avalia\u00e7\u00f5es reais publicadas`;
+        }
+    }
+
+    function createReviewCard(review, animate = false) {
+        const name = cleanText(review?.nome, MAX_NAME_LENGTH) || "Paciente IORE";
+        const comment = cleanText(review?.comentario, MAX_COMMENT_LENGTH);
+        const treatment = normalizeTreatment(review?.tratamento);
+        const stars = getReviewStars(review);
+
+        const card = document.createElement("div");
+        card.className = "aval-card";
+        if (animate) card.style.animation = "fadeUp .6s ease both";
+
+        const starsWrapper = document.createElement("div");
+        starsWrapper.className = "aval-stars";
+        renderStars(starsWrapper, stars);
+
+        const text = document.createElement("p");
+        text.className = "aval-text";
+        text.textContent = comment;
+
+        const author = document.createElement("div");
+        author.className = "aval-author";
+
+        const avatar = document.createElement("div");
+        avatar.className = "aval-avatar";
+        avatar.textContent = getInitials(name);
+
+        const authorInfo = document.createElement("div");
+        const authorName = document.createElement("div");
+        authorName.className = "aval-name";
+        authorName.textContent = name;
+
+        const meta = document.createElement("div");
+        meta.className = "aval-meta";
+        meta.textContent = `Paciente${treatment ? " - " + treatment : ""}`;
+
+        authorInfo.append(authorName, meta);
+        if (treatment) {
+            const chip = document.createElement("span");
+            chip.className = "aval-tags-chip";
+            chip.textContent = treatment;
+            authorInfo.appendChild(chip);
+        }
+
+        author.append(avatar, authorInfo);
+        card.append(starsWrapper, text, author);
+        return card;
+    }
+
+    function showReviewSuccess() {
+        document.getElementById("aval-form-content").style.display = "none";
+        document.getElementById("aval-success").style.display = "block";
+    }
+
+    // --- Enviar Avaliação (usa os IDs do formulário bonito) ---
+    window.enviarAvaliacao = async function() {
+        if (isSendingReview) return;
+
+        const honeypot = document.getElementById("aval-site");
+        if (honeypot?.value.trim()) {
+            showReviewSuccess();
             return;
         }
 
+        const nome = cleanText(document.getElementById("aval-nome").value, MAX_NAME_LENGTH);
+        const tratamento = normalizeTreatment(document.getElementById("aval-tratamento").value);
+        const texto = cleanText(document.getElementById("aval-texto").value, MAX_COMMENT_LENGTH);
+        const ratings = window.reviewRatings || {};
+        const local = normalizeRating(ratings.local);
+        const servico = normalizeRating(ratings.servico);
+        const atendimento = normalizeRating(ratings.atendimento);
+
+        if (nome.length < 2) { alert("Por favor, informe seu nome."); return; }
+        if (!local && !servico && !atendimento) {
+            alert("Por favor, avalie pelo menos um critério."); return;
+        }
+        if (texto.length < 10) { alert("Por favor, escreva um depoimento um pouco mais completo."); return; }
+
+        const mediaEstrelas = averageRatings();
+        const submitButton = document.querySelector(".aval-submit");
+
         try {
+            isSendingReview = true;
+            if (submitButton) submitButton.disabled = true;
+
             await addDoc(collection(db, "avaliacoes"), {
-                nome: nome,
-                comentario: comentario,
-                estrelas: parseInt(selectedRating),
-                data: new Date()
+                nome,
+                tratamento,
+                comentario: texto,
+                estrelas: mediaEstrelas,
+                local,
+                servico,
+                atendimento,
+                status: "approved",
+                data: serverTimestamp()
             });
-            alert("Avaliação enviada com sucesso!");
-            location.reload(); // Recarrega para mostrar a nova avaliação
+
+            showReviewSuccess();
+            await carregarAvaliacoes();
+
         } catch (e) {
-            console.error("Erro ao adicionar: ", e);
-            alert("Erro ao enviar avaliação. Verifique as regras do seu Banco de Dados.");
+            console.error(e);
+            alert("Erro ao enviar avaliação. Tente novamente.");
+            if (submitButton) submitButton.disabled = false;
+        } finally {
+            isSendingReview = false;
         }
     }
 
-    // --- Carregar Avaliações do Firebase ---
+    // --- Carregar avaliações do Firebase ao abrir a página ---
     async function carregarAvaliacoes() {
-        const container = document.getElementById('lista-avaliacoes');
-        const q = query(collection(db, "avaliacoes"), orderBy("data", "desc"));
-        
-        const querySnapshot = await getDocs(q);
-        container.innerHTML = ""; // Limpa o "Carregando..."
+        try {
+            const q = query(
+                collection(db, "avaliacoes"),
+                orderBy("data", "desc"),
+                limit(REVIEW_STATS_LIMIT)
+            );
+            const querySnapshot = await getDocs(q);
+            const grid = document.getElementById("aval-depoimentos");
+            if (!grid) return;
 
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const estrelasHTML = '★'.repeat(data.estrelas) + '☆'.repeat(5 - data.estrelas);
-            
-            container.innerHTML += `
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">${data.nome} <span class="text-warning">${estrelasHTML}</span></h5>
-                        <p class="card-text">${data.comentario}</p>
-                        <small class="text-muted">${data.data.toDate().toLocaleDateString('pt-BR')}</small>
-                    </div>
-                </div>
-            `;
-        });
+            const reviews = [];
+            querySnapshot.forEach((snapshotDoc) => {
+                const review = snapshotDoc.data();
+                if (isDisplayableReview(review)) {
+                    reviews.push(review);
+                }
+            });
+
+            updateReviewSummary(reviews);
+            const reviewCards = reviews
+                .slice(0, REVIEW_DISPLAY_LIMIT)
+                .map(review => createReviewCard(review, true));
+
+            if (reviewCards.length) {
+                grid.replaceChildren(...reviewCards);
+            } else {
+                grid.replaceChildren(createEmptyReviewState("Ainda n\u00e3o h\u00e1 avalia\u00e7\u00f5es publicadas."));
+            }
+        } catch (e) {
+            console.error("Erro ao carregar avaliações:", e);
+            updateReviewSummary([]);
+            const grid = document.getElementById("aval-depoimentos");
+            if (grid) {
+                grid.replaceChildren(createEmptyReviewState("N\u00e3o foi poss\u00edvel carregar as avalia\u00e7\u00f5es agora."));
+            }
+        }
     }
 
-    // Chama a função ao abrir a página
+    window.carregarAvaliacoes = carregarAvaliacoes;
     carregarAvaliacoes();
 </script>
 </body>
