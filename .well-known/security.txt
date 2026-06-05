@@ -1,0 +1,6 @@
+Contact: https://www.instagram.com/iore.odonto/
+Contact: https://iore.com.br/#localizacao
+Preferred-Languages: pt-BR
+Canonical: https://iore.com.br/.well-known/security.txt
+Policy: https://iore.com.br/
+Expires: 2027-06-05T23:59:00-03:00

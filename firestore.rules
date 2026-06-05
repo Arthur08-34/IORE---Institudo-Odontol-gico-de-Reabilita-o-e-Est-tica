@@ -46,12 +46,13 @@ service cloud.firestore {
         && validRating(data.local)
         && validRating(data.servico)
         && validRating(data.atendimento)
+        && data.status is string
         && data.data is timestamp;
     }
 
     function validPublicReview(data) {
       return validReviewShape(data)
-        && data.status in ["approved", "pending"]
+        && data.status == "pending"
         && data.data == request.time;
     }
 
@@ -61,8 +62,9 @@ service cloud.firestore {
     }
 
     match /avaliacoes/{reviewId} {
-      allow get: if false;
-      allow list: if validPublicReviewQuery();
+      allow get: if resource.data.status == "approved";
+      allow list: if validPublicReviewQuery()
+        && resource.data.status == "approved";
       allow create: if validPublicReview(request.resource.data);
       allow update, delete: if false;
     }

@@ -10,7 +10,23 @@
       "firestore.rules",
       "firestore.indexes.json",
       "SECURITY_FIREBASE.md",
-      "**/.*",
+      ".git",
+      ".git/**",
+      ".firebase",
+      ".firebase/**",
+      ".firebaserc",
+      ".codex",
+      ".codex/**",
+      ".agents",
+      ".agents/**",
+      ".env",
+      ".env.*",
+      "**/.env",
+      "**/.env.*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.p12",
+      "**/*secret*",
       "**/node_modules/**"
     ],
     "headers": [
@@ -20,6 +36,15 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "/.well-known/security.txt",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
           }
         ]
       },

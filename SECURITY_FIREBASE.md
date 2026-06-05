@@ -1,42 +1,69 @@
-# Segurança do Firebase e do site
+# Seguranca do Firebase e do site
 
-## O que foi protegido neste projeto
+## Protecoes aplicadas no projeto
 
-- As avaliações enviadas pelo site agora entram como `pending`.
-- O site só exibe avaliações com `status: "approved"`.
-- Os comentários vindos do Firestore são renderizados com `textContent`, evitando injeção de HTML/JavaScript.
-- A consulta do Firestore foi limitada a 12 avaliações aprovadas.
-- `firestore.rules` bloqueia qualquer coleção que não seja `avaliacoes`.
-- `firebase.json` adiciona headers de segurança quando publicado no Firebase Hosting.
-- `404.html` será exibido automaticamente pelo Firebase Hosting quando uma URL não existir.
+- Avaliacoes enviadas pelo site entram como `status: "pending"`.
+- O site consulta e exibe somente avaliacoes com `status: "approved"`.
+- As regras do Firestore bloqueiam leitura de avaliacoes pendentes.
+- As regras do Firestore bloqueiam `update` e `delete` publicos.
+- As regras validam campos, tipos, tamanhos e notas antes de aceitar uma avaliacao.
+- Comentarios vindos do Firestore sao renderizados com `textContent`, evitando injecao de HTML.
+- Links externos com `target="_blank"` usam `rel="noopener noreferrer"`.
+- `firebase.json` envia headers de seguranca pelo Firebase Hosting.
+- `/.well-known/security.txt` foi adicionado para contato responsavel.
+- `404.html` sera exibido automaticamente quando uma URL nao existir.
 
-## Passos obrigatórios no Firebase
+## Fluxo correto de moderacao
 
-1. Publique as regras e o índice:
+1. O paciente envia a avaliacao pelo site.
+2. O documento entra na colecao `avaliacoes` como `pending`.
+3. Um responsavel entra no Firebase Console e confere o texto.
+4. Se estiver tudo certo, altera `status` de `pending` para `approved`.
+5. Somente depois disso a avaliacao aparece no site.
 
-   ```bash
-   firebase deploy --only firestore,hosting
-   ```
+## Deploy recomendado
 
-2. Aprove depoimentos manualmente no Firestore:
+Use este comando para publicar site, regras e indices:
 
-   - Abra a coleção `avaliacoes`.
-   - Confira o conteúdo.
-   - Troque `status` de `pending` para `approved` somente quando o texto puder aparecer no site.
+```powershell
+cd "C:\Users\arthu\OneDrive\Área de Trabalho\Códigos\IORE"
+& "$env:APPDATA\npm\firebase.cmd" deploy --only hosting,firestore
+```
 
-3. Restrinja a API key no Google Cloud Console:
+## Passos obrigatorios fora do codigo
 
-   - Vá em **APIs e serviços > Credenciais**.
-   - Abra a chave usada pelo app web.
-   - Em **Application restrictions**, permita apenas os domínios reais do site.
-   - Em **API restrictions**, deixe só as APIs Firebase/Google realmente usadas.
+### 1. Restringir a API key
 
-4. Ative o Firebase App Check para Web:
+No Google Cloud Console:
 
-   - Use reCAPTCHA Enterprise ou reCAPTCHA v3.
-   - Ative enforcement para Cloud Firestore depois de testar em modo monitoramento.
-   - Depois disso, adicione a inicialização do App Check no `Index.html` com a chave pública do reCAPTCHA.
+- Abra **APIs e servicos > Credenciais**.
+- Selecione a chave usada pelo app web.
+- Em **Application restrictions**, use **HTTP referrers**.
+- Permita somente os dominios reais, por exemplo:
+  - `https://iore.com.br/*`
+  - `https://www.iore.com.br/*`
+  - `https://iore-d7e47.web.app/*`
+  - `https://iore-d7e47.firebaseapp.com/*`
+- Em **API restrictions**, permita apenas as APIs usadas pelo Firebase/Firestore.
 
-## Observação importante
+### 2. Ativar Firebase App Check
 
-Não existe como impedir que alguém veja o HTML, CSS e JavaScript enviados ao navegador. A proteção real é nunca colocar segredos no frontend e bloquear o acesso ao banco com Security Rules, App Check e restrições de domínio/API key.
+No Firebase Console:
+
+- Abra **App Check**.
+- Registre o app Web.
+- Use reCAPTCHA Enterprise ou reCAPTCHA v3.
+- Comece em modo de monitoramento.
+- Depois que tudo estiver funcionando, ative enforcement para Cloud Firestore.
+
+### 3. Aprovar avaliacoes manualmente
+
+No Firestore:
+
+- Abra a colecao `avaliacoes`.
+- Leia o conteudo enviado.
+- Altere `status` para `approved` apenas quando puder aparecer publicamente.
+
+## Observacao importante
+
+Nao existe como esconder o HTML, CSS e JavaScript enviados ao navegador. A seguranca real vem de nao colocar segredos no frontend, validar tudo no Firestore Rules, ativar App Check, restringir a API key por dominio e monitorar o uso do projeto.
